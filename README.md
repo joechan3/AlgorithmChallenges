@@ -1,2 +1,2 @@
 #Algorithm Challenges
-A collection of algorithm problems with testing using [Jasmine](http://jasmine.github.io/).
+A collection of algorithm problems solved using JavaScript and tested with [Jasmine](http://jasmine.github.io/).
