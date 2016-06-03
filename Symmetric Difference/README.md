@@ -1,6 +1,6 @@
 # Symmetric Difference
 
-**Status:** Developing.
+**Status:** Done.
 
 **Challenge from:** [Free Code Camp](http://www.freecodecamp.com).
 
