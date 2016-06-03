@@ -2,7 +2,8 @@ function checkCashRegister(price, cash, cid) {
     'use strict';
 
     var change = []; //Holds the composition of the change returned to customer
-    var currenciesCents = [['ONE HUNDRED', 10000], ['TWENTY', 2000], ['TEN', 1000], ['FIVE', 500], ['ONE', 100], ['QUARTER', 25], ['DIME', 10], ['NICKEL', 5], ['PENNY', 1]]; //scope of types of currencies applicable
+    var currenciesCents = [['ONE HUNDRED', 10000], ['TWENTY', 2000], ['TEN', 1000], ['FIVE', 500],
+            ['ONE', 100], ['QUARTER', 25], ['DIME', 10], ['NICKEL', 5], ['PENNY', 1]]; //scope of types of currencies applicable
     var currencyName; //'ONE HUNDRED', 'DIME', etc.
     var currencyRequiredAmt; //Amount required of a particular currency type (e.g. $100 in TWENTIES)
     var difference = cash - price; //Total of change required
