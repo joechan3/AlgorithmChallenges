@@ -1,17 +1,15 @@
 function checkCashRegister(price, cash, cid) {
     'use strict';
-    //DELETE THESE AFTERWARDS
-    //price = 100;
-    //cash = 800;
-    //cid = [["PENNY", 1.01], ["NICKEL", 2.05], ["DIME", 3.10], ["QUARTER", 4.25], ["ONE", 90.00], ["FIVE", 55.00], ["TEN", 20.00], ["TWENTY", 700.00], ["ONE HUNDRED", 100.00]];
-    var change = [];
-    var currenciesCents = [['ONE HUNDRED', 10000], ['TWENTY', 2000], ['TEN', 1000], ['FIVE', 500], ['ONE', 100], ['QUARTER', 25], ['DIME', 10], ['NICKEL', 5], ['PENNY', 1]];
-    var currencyName;
-    var difference = cash - price;
-    var drawerIndex;
-    var totalInDrawer = 0;
-    
-    //Convert all dollars to cents prior to running rest of algorithm 
+
+    var change = []; //Holds the composition of the change returned to customer
+    var currenciesCents = [['ONE HUNDRED', 10000], ['TWENTY', 2000], ['TEN', 1000], ['FIVE', 500], ['ONE', 100], ['QUARTER', 25], ['DIME', 10], ['NICKEL', 5], ['PENNY', 1]]; //scope of types of currencies applicable
+    var currencyName; //'ONE HUNDRED', 'DIME', etc.
+    var currencyRequiredAmt; //Amount required of a particular currency type (e.g. $100 in TWENTIES)
+    var difference = cash - price; //Total of change required
+    var drawerIndex; //Holds an index for cid array
+    var totalInDrawer = 0; //Holds total amount left in cash register after drawdown for change
+
+    //Convert all dollars to cents prior to running rest of algorithm
     //to avoid precision errors (re: 0.1 + 0.2 = 0.30000000000000004)
     price *= 100;
     cash *= 100;
@@ -19,8 +17,8 @@ function checkCashRegister(price, cash, cid) {
     cid.forEach(function turnToCents(cash) {
         cash[1] *= 100;
     });
-          
-    currenciesCents.forEach(function (currency) {
+
+    currenciesCents.forEach(function determineChange(currency) {
         switch (currency[1]) {
         case 10000:
             currencyName = cid[8][0];
@@ -59,13 +57,15 @@ function checkCashRegister(price, cash, cid) {
             drawerIndex = 0;
             break;
         default:
-            console.log('Currency type not found!');
+            throw 'Currency type not found!';
         }
-        
+
+        //Use up the larger currencies first as much as possible
         if (difference >= currency[1]) {
-            if ((Math.floor(difference / currency[1]) * currency[1]) <= cid[drawerIndex][1]) {
-                change.push([currencyName, Math.floor(difference / currency[1]) * currency[1]]);
-                cid[drawerIndex][1] -= Math.floor(difference / currency[1]) * currency[1];
+            currencyRequiredAmt = Math.floor(difference / currency[1]) * currency[1];
+            if (currencyRequiredAmt <= cid[drawerIndex][1]) {
+                change.push([currencyName, currencyRequiredAmt]);
+                cid[drawerIndex][1] -= currencyRequiredAmt;
                 difference = difference % currency[1];
             } else {
                 change.push([currencyName, cid[drawerIndex][1]]);
@@ -74,22 +74,16 @@ function checkCashRegister(price, cash, cid) {
             }
         }
     });
-    
-    
-    
+
+    //Determine remaining cash in drawer
     cid.forEach(function sumDrawers(drawer) {
         totalInDrawer += drawer[1];
     });
-    
-     //Convert cents back to dollars format
+
+    //Convert cents back to dollars format
     change.forEach(function turnToCents(cash) {
         cash[1] /= 100;
     });
-    
-    console.log('cid is: ', cid);
-    console.log('Change is: ',  change);
-    console.log('Difference is: ' + difference);
-    console.log('Total in drawer is: ' + totalInDrawer);
 
     if (difference > 0) {
         return 'Insufficient Funds';
@@ -97,96 +91,6 @@ function checkCashRegister(price, cash, cid) {
     if (totalInDrawer === 0) {
         return 'Closed';
     }
-    
+
     return change;
-    
-//    if (difference === 0) {
-//        return change;
-//    } else if (difference > 0) {
-//        return 'Insufficient Funds';
-//    }
 }
-
-checkCashRegister(19.50, 20.00, [["PENNY", 0.50], ["NICKEL", 0], ["DIME", 0], ["QUARTER", 0], ["ONE", 0], ["FIVE", 0], ["TEN", 0], ["TWENTY", 0], ["ONE HUNDRED", 0]]);
-
-//checkCashRegister(19.50, 20.00, [["PENNY", 0.01], ["NICKEL", 0], ["DIME", 0], ["QUARTER", 0], ["ONE", 0], ["FIVE", 0], ["TEN", 0], ["TWENTY", 0], ["ONE HUNDRED", 0]]);
-
-// Example cash-in-drawer array:
-// [["PENNY", 1.01],
-// ["NICKEL", 2.05],
-// ["DIME", 3.10],
-// ["QUARTER", 4.25],
-// ["ONE", 90.00],
-// ["FIVE", 55.00],
-// ["TEN", 20.00],
-// ["TWENTY", 60.00],
-// ["ONE HUNDRED", 100.00]]
-
-    //Find out if you have insufficient funds
-    
-    //Find out if cash in drawer is equal to change due
-    
-    //Find out change to give back
-    
-    
-    // Here is your change, ma'am.
-
-//update cid
-//  cid[8][1] = cid[8][1] - (Math.floor(difference / 100)*100);
-/*
-
-/*
-//HUNDREDS
-    if (difference >= 100) {
-        if ((Math.floor(difference / 100) * 100) <= cid[8][1]) {
-            change.push([cid[8][0], Math.floor(difference / 100) * 100]);
-            difference = difference % 100;
-        } else {
-            change.push([cid[8][0], cid[8][1]]);
-            difference -= cid[8][1];
-        }
-    }
-    
-    //TWENTIES
-    if (difference >= 20) {
-        if ((Math.floor(difference / 20) * 20) <= cid[7][1]) {
-            change.push([cid[7][0], Math.floor(difference / 20) * 20]);
-            difference = difference % 20;
-        } else {
-            change.push([cid[7][0], cid[7][1]]);
-            difference -= cid[7][1];
-        }
-    }
-    
-    //TENS
-    if (difference >= 10) {
-        if ((Math.floor(difference / 10) * 10) <= cid[6][1]) {
-            change.push([cid[6][0], Math.floor(difference / 10) * 10]);
-            difference = difference % 10;
-        } else {
-            change.push([cid[6][0], cid[6][1]]);
-            difference -= cid[6][1];
-        }
-    }
-    
-    //FIVES
-    if (difference >= 5) {
-        if ((Math.floor(difference / 5) * 5) <= cid[5][1]) {
-            change.push([cid[5][0], Math.floor(difference / 5) * 5]);
-            difference = difference % 5;
-        } else {
-            change.push([cid[5][0], cid[5][1]]);
-            difference -= cid[5][1];
-        }
-    }
-    
-    //ONES
-    if (difference >= 1) {
-        if ((Math.floor(difference / 1) * 1) <= cid[4][1]) {
-            change.push([cid[4][0], Math.floor(difference / 1) * 1]);
-            difference = difference % 1;
-        } else {
-            change.push([cid[4][0], cid[4][1]]);
-            difference -= cid[4][1];
-        }
-    }*/
