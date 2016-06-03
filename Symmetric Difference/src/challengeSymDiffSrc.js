@@ -53,7 +53,7 @@ function destroyIntraDuplicates(set) {
 
     });
 
-    //Last element is pushed to processedSet because any duplicates to it in 
+    //Last element is pushed to processedSet because any duplicates to it in
     //the set array would have been ignored in the forEach above.
     processedSet.push(set[set.length - 1]);
     return processedSet;
