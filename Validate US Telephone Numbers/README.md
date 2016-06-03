@@ -1,6 +1,10 @@
 # Validate US Telephone Numbers
 
-Challenge from [Free Code Camp](http://www.freecodecamp.com).
+**Status:** Solved.
+
+**Challenge from:** [Free Code Camp](http://www.freecodecamp.com).
+
+##Challenge
 
 Return `true` if the passed string is a valid US phone number.
 
