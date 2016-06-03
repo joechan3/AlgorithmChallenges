@@ -9,6 +9,7 @@ function checkCashRegister(price, cash, cid) {
     var currencyName;
     var difference = cash - price;
     var drawerIndex;
+    var totalInDrawer = 0;
     
     //Convert all dollars to cents prior to running rest of algorithm 
     //to avoid precision errors (re: 0.1 + 0.2 = 0.30000000000000004)
@@ -64,28 +65,51 @@ function checkCashRegister(price, cash, cid) {
         if (difference >= currency[1]) {
             if ((Math.floor(difference / currency[1]) * currency[1]) <= cid[drawerIndex][1]) {
                 change.push([currencyName, Math.floor(difference / currency[1]) * currency[1]]);
+                cid[drawerIndex][1] -= Math.floor(difference / currency[1]) * currency[1];
                 difference = difference % currency[1];
             } else {
                 change.push([currencyName, cid[drawerIndex][1]]);
-                //difference = difference - cid[drawerIndex][1]
                 difference -= cid[drawerIndex][1];
+                cid[drawerIndex][1] = 0;
             }
         }
     });
     
-    //Convert cents back to dollars format
+    
+    
+    cid.forEach(function sumDrawers(drawer) {
+        totalInDrawer += drawer[1];
+    });
+    
+     //Convert cents back to dollars format
     change.forEach(function turnToCents(cash) {
         cash[1] /= 100;
     });
     
+    console.log('cid is: ', cid);
     console.log('Change is: ',  change);
     console.log('Difference is: ' + difference);
+    console.log('Total in drawer is: ' + totalInDrawer);
 
-
+    if (difference > 0) {
+        return 'Insufficient Funds';
+    }
+    if (totalInDrawer === 0) {
+        return 'Closed';
+    }
+    
     return change;
+    
+//    if (difference === 0) {
+//        return change;
+//    } else if (difference > 0) {
+//        return 'Insufficient Funds';
+//    }
 }
 
-checkCashRegister(3.26, 100.00, [["PENNY", 1.01], ["NICKEL", 2.05], ["DIME", 3.10], ["QUARTER", 4.25], ["ONE", 90.00], ["FIVE", 55.00], ["TEN", 20.00], ["TWENTY", 60.00], ["ONE HUNDRED", 100.00]]);
+checkCashRegister(19.50, 20.00, [["PENNY", 0.50], ["NICKEL", 0], ["DIME", 0], ["QUARTER", 0], ["ONE", 0], ["FIVE", 0], ["TEN", 0], ["TWENTY", 0], ["ONE HUNDRED", 0]]);
+
+//checkCashRegister(19.50, 20.00, [["PENNY", 0.01], ["NICKEL", 0], ["DIME", 0], ["QUARTER", 0], ["ONE", 0], ["FIVE", 0], ["TEN", 0], ["TWENTY", 0], ["ONE HUNDRED", 0]]);
 
 // Example cash-in-drawer array:
 // [["PENNY", 1.01],
