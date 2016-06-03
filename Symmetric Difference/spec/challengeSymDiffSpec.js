@@ -29,7 +29,6 @@ describe('Symmetric Difference algorithm tests', function () {
     
     it('sym([1, 1, 2, 5], [2, 2, 3, 5], [3, 4, 5, 5]) should return [1, 4, 5]', function () {
         foo = sym([1, 1, 2, 5], [2, 2, 3, 5], [3, 4, 5, 5]);
-        //foo = [1, 4, 5];
         expect(foo).toEqual([1, 4, 5]);
     });
     
