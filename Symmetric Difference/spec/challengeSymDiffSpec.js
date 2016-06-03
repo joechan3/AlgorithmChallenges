@@ -9,13 +9,11 @@ describe('Symmetric Difference algorithm tests', function () {
   
     it('sym([1, 2, 3], [5, 2, 1, 4]) should return [3, 4, 5].', function () {
         foo = sym([1, 2, 3], [5, 2, 1, 4]);
-        //foo = [3, 4, 5];
         expect(foo).toEqual([3, 4, 5]);
     });
     
     it('sym([1, 2, 3], [5, 2, 1, 4]) should contain only three elements.', function () {
         foo = sym([1, 2, 3], [5, 2, 1, 4]);
-        //foo = [3, 4, 5];
         expect(foo.length).toBe(3);
     });
     
