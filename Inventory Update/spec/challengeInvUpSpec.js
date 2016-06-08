@@ -7,7 +7,7 @@ describe('Inventory Update algorithm tests', function () {
         foo = undefined;
     });
   
-    it('updateInventory() should return an array.', function () {
+    it('updateInventory(curInv, newInv) should return an array.', function () {
         foo = updateInventory(curInv, newInv);
         //foo = ['foo', 'bar', 'baz']        ;
         expect(Array.isArray(foo)).toBe(true);
