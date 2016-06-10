@@ -10,18 +10,20 @@ function permAlone(str) {
 
     //Permutation generation through lexicographic order: https://en.wikipedia.org/wiki/Permutation#Generation_in_lexicographic_order
     function generateIndexPermutations(a) {
-        var k, l, temp;
-        var permCollection = [];
-        var firstPermutation = [];
+        var firstPermutation = []; //Holds the first permutation of a's indices (1 dimensional).
+        var k; //Temporarily holds an index number of a.
+        var l; //Temporarily holds an index number of a.
         var lastPermutationFound = false; //true if the last permutation has been generated.
+        var permCollection = []; //Holds permutations of a's indices (2 dimensional).
         var subArray = []; //Holds the portion of the array to be reversed during lexicographic order permutation generation
-        
+        var temp; //Used for swapping values of a.
+
         a = a.split('');
-        
+
         a.forEach(function makeUniqueElements(element, index) {
             a[index] = index;
         });
-        
+
         a.sort(function sortInputAscending(x, y) {
             if (x === y) {
                 return 0;
@@ -33,14 +35,14 @@ function permAlone(str) {
 
             return 1;
         });
-        
+
         firstPermutation = a.slice(0);
-        
+
         permCollection.push(firstPermutation);
-        
-        //There is a conditional break in the while loop        
+
+        //There is a conditional break in the while loop
         while (true) {
-            //Find the largest index k (i.e. right-most value) such that a[k] < a[k + 1]. 
+            //Find the largest index k (i.e. right-most value) such that a[k] < a[k + 1].
             //If no such index exists, the permutation is the last permutation.
             for (k = a.length - 2; k >= 0; k -= 1) {
                 if (a[k] < a[k + 1]) {
@@ -56,7 +58,7 @@ function permAlone(str) {
                 break;
             }
 
-            //Find the largest index l (i.e. right-most value) greater than k such that a[k] < a[l].            
+            //Find the largest index l (i.e. right-most value) greater than k such that a[k] < a[l].
             for (l = a.length - 1; l > k; l -= 1) {
                 if (a[k] < a[l]) {
                     break;
@@ -77,17 +79,15 @@ function permAlone(str) {
                 a = (a.slice(0, k + 1)).concat(subArray);
                 permCollection.push(a.slice(0));
             }
-
         }
-        
+
         return permCollection;
-        
     }
-    
+
     indexPerm = generateIndexPermutations(str);
-    
+
     totalPermutations = indexPerm.length;
-    
+
     //Generate str's permutations
     indexPerm.forEach(function generateAllStrPerm(element) {
         element.forEach(function generateOneStrPerm(item) {
@@ -103,15 +103,6 @@ function permAlone(str) {
             repeatCount += 1;
         }
     });
-    
-    console.log('totalPermutations: ' + totalPermutations + ' repeatCount: ' + repeatCount);
-    console.log(totalPermutations - repeatCount);
-    //return str;
-    
+
     return totalPermutations - repeatCount;
 }
-
-//permAlone('aab');
-
-
-//str.match(regexp)
