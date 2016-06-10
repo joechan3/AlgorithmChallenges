@@ -5,9 +5,9 @@
 **Challenge from:** [Free Code Camp](http://www.freecodecamp.com).
 
 ##Challenge
-Convert a date range consisting of two dates formatted as YYYY-MM-DD into a more readable format.
+Convert a date range consisting of two dates formatted as `YYYY-MM-DD` into a more readable format.
 
-The friendly display should use month names instead of numbers and ordinal dates instead of cardinal (1st instead of 1).
+The friendly display should use month names instead of numbers and ordinal dates instead of cardinal (`1st` instead of `1`).
 
 Do not display information that is redundant or that can be inferred by the user: if the date range ends in less than a year from when it begins, do not display the ending year.
 
@@ -17,6 +17,6 @@ If the range ends in the same month that it begins, do not display the ending ye
 
 Examples:
 
-makeFriendlyDates(["2016-07-01", "2016-07-04"]) should return ["July 1st","4th"]
+`makeFriendlyDates(["2016-07-01", "2016-07-04"])` should return `["July 1st","4th"]`
 
-makeFriendlyDates(["2016-07-01", "2018-07-04"]) should return ["July 1st, 2016", "July 4th, 2018"].
+`makeFriendlyDates(["2016-07-01", "2018-07-04"])` should return `["July 1st, 2016", "July 4th, 2018"]`.
