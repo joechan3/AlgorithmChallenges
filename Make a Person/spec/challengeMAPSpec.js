@@ -5,6 +5,7 @@ describe('Make a person algorithm tests', function () {
   
     beforeEach(function () {
         foo = undefined;
+        
     });
   
     it('Object.keys(bob).length should return 6.', function () {

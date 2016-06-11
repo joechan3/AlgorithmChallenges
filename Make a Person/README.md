@@ -1,6 +1,6 @@
 # Make a Person
 
-**Status:** Solving . . 
+**Status:** Solved! 
 
 **Challenge from:** [Free Code Camp](http://www.freecodecamp.com).
 
