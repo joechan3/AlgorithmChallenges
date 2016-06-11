@@ -7,12 +7,12 @@
 ##Challenge
 Fill in the object constructor with the following methods below:
 
-    `getFirstName()`
-    `getLastName()`
-    `getFullName()`
-    `setFirstName(first)`
-    `setLastName(last)`
-    `setFullName(firstAndLast)`
+    getFirstName()
+    getLastName()
+    getFullName()
+    setFirstName(first)
+    setLastName(last)
+    setFullName(firstAndLast)
 
 Run the tests to see the expected output for each method.
 
