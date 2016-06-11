@@ -1,4 +1,4 @@
-/*global describe, beforeEach, it, expect, makeFriendlyDates */
+/*global describe, beforeEach, it, expect, orbitalPeriod */
 
 describe('Make a person algorithm tests', function () {
     var foo;
