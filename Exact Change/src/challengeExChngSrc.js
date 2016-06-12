@@ -1,10 +1,10 @@
 function checkCashRegister(price, cash, cid) {
-    'use strict';
+    "use strict";
 
     var change = []; //Holds the composition of the change returned to customer
-    var currenciesCents = [['ONE HUNDRED', 10000], ['TWENTY', 2000], ['TEN', 1000], ['FIVE', 500],
-            ['ONE', 100], ['QUARTER', 25], ['DIME', 10], ['NICKEL', 5], ['PENNY', 1]]; //scope of types of currencies applicable
-    var currencyName; //'ONE HUNDRED', 'DIME', etc.
+    var currenciesCents = [["ONE HUNDRED", 10000], ["TWENTY", 2000], ["TEN", 1000], ["FIVE", 500],
+            ["ONE", 100], ["QUARTER", 25], ["DIME", 10], ["NICKEL", 5], ["PENNY", 1]]; //scope of types of currencies applicable
+    var currencyName; //"ONE HUNDRED", "DIME", etc.
     var currencyRequiredAmt; //Amount required of a particular currency type (e.g. $100 in TWENTIES)
     var difference = cash - price; //Total of change required
     var drawerIndex; //Holds an index for cid array
@@ -58,7 +58,7 @@ function checkCashRegister(price, cash, cid) {
             drawerIndex = 0;
             break;
         default:
-            throw 'Currency type not found!';
+            throw "Currency type not found!";
         }
 
         //Use up the larger currencies first as much as possible
@@ -87,10 +87,10 @@ function checkCashRegister(price, cash, cid) {
     });
 
     if (difference > 0) {
-        return 'Insufficient Funds';
+        return "Insufficient Funds";
     }
     if (totalInDrawer === 0) {
-        return 'Closed';
+        return "Closed";
     }
 
     return change;
