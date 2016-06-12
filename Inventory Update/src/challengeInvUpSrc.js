@@ -1,7 +1,7 @@
 function updateInventory(currentInventory, newInventory) {
-    'use strict';
-    var curName = ''; //Name of item that is being processed that is from the current inventory.
-    var newName = ''; //Name of item that is being processed that is from the new inventory.
+    "use strict";
+    var curName = ""; //Name of item that is being processed that is from the current inventory.
+    var newName = ""; //Name of item that is being processed that is from the new inventory.
     var newQty = 0; //Quantity of item being processed that is from the new inventory.
     var isNewItem; //True if an item doesn't exist in the current inventory, false otherwise
 
